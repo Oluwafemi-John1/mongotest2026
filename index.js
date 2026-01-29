@@ -475,11 +475,18 @@ app.get('/', (req, res) => {
 
 // Get all Nigerian foods
 app.get('/api/foods', (req, res) => {
-    res.json({
-        success: true,
-        count: nigerianFoods.length,
-        data: nigerianFoods
-    });
+    try {
+        res.status(201).json({
+            success: true,
+            count: nigerianFoods.length,
+            data: nigerianFoods
+        });
+    } catch (error) {
+        res.status(401).json({
+            success: false,
+            data: error
+        });
+    }
 });
 
 // Get food by ID
