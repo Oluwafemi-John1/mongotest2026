@@ -476,8 +476,9 @@ app.get('/', (req, res) => {
 // Get all Nigerian foods
 app.get('/api/foods', (req, res) => {
     try {
-        res.status(201).json({
-            // success: true,
+        res.json({
+            success: true,
+            status: 201,
             count: nigerianFoods.length,
             data: nigerianFoods
         });
