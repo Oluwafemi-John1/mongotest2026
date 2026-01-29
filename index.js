@@ -470,7 +470,7 @@ const nigerianFoods = [
 ];
 
 app.get('/', (req, res) => {
-    res.send({ message: "Slash has been accessed" })
+    res.status(200).send({ message: "Slash has been accessed" })
 })
 
 // Get all Nigerian foods
