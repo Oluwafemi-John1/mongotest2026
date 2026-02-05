@@ -1,43 +1,15 @@
 const express = require('express');
 const app = express()
 require('dotenv').config()
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { saveStudent, getAllStudents } = require('./controllers/studentController');
 
 const port = process.env.PORT
 const MONGO_URI = process.env.URI
-const { Schema, model } = mongoose
 
-const studentSchema = new Schema({
-    name: {type: String, required: true},
-    email: {type: String, required: true, unique: true},
-    age: {type: Number, required: true},
-    course: {type: String, required: true},
-    gender: {type: String, required: true},
-    isGraduate: {type: Boolean, required: true}
-})
 
-const studentModel = model('SQI_STUDENT', studentSchema)
-app.get("/testmongodb", (req,res)=>{
-        const big = new studentModel({
-            name: 'Abobs',
-            email: 'victory@gmail.com',
-            age: 78,
-            course: "Software Engineering",
-            gender: "male",
-            isGraduate: false
-        })
-        big.save();
-})
-// const student = {
-//     name: "Abobs",
-//     age: 56,
-//     course: "Software Engineering",
-//     gender: "male"
-// }
-
-// const {age} = student
-
-// console.log(age);
+app.get("/testmongodb", saveStudent)
+app.get('/allstudents', getAllStudents)
 
 
 mongoose.connect(MONGO_URI)
