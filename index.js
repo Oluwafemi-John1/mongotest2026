@@ -3,10 +3,17 @@ const app = express()
 require('dotenv').config()
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
 const { saveStudent, getAllStudents } = require('./controllers/studentController');
 
 const port = process.env.PORT
 const MONGO_URI = process.env.URI
+
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
