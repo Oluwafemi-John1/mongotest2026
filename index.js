@@ -2,11 +2,14 @@ const express = require('express');
 const app = express()
 require('dotenv').config()
 const mongoose = require('mongoose');
+const path = require('path');
 const { saveStudent, getAllStudents } = require('./controllers/studentController');
 
 const port = process.env.PORT
 const MONGO_URI = process.env.URI
 
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/testmongodb", saveStudent)
 app.get('/allstudents', getAllStudents)
@@ -474,8 +477,9 @@ const nigerianFoods = [
     }
 ];
 
+// Serve the landing page at root
 app.get('/', (req, res) => {
-    res.status(200).send({ message: "Slash has been accessed" })
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
 // Get all Nigerian foods
