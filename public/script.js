@@ -331,8 +331,16 @@ function displayFoods(foods) {
         y: 30,
         stagger: 0.1,
         duration: 0.6,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        clearProps: 'all'  // Clear animation properties after completion
     });
+
+    // Fallback: ensure cards are visible
+    setTimeout(() => {
+        document.querySelectorAll('.food-card').forEach(card => {
+            card.style.opacity = '1';
+        });
+    }, 1000);
 }
 
 // Filter foods
